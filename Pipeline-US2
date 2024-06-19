@@ -1,0 +1,94 @@
+pipeline {
+    agent any
+
+    parameters {
+        string(name: 'NAME', description: 'Please tell me your name')
+        choice(name: 'LOCO', choices: ['à pied', 'moto', 'voiture'], description: 'Choose your locomotion type')
+        choice(name: 'VEHC', choices: ['Utilitaire', 'Citadine'], description: 'Choose your vehicle type')
+        choice(name: 'PAIE', choices: ['CB', 'Cash', 'En ligne'], description: 'Choose your paiement method')
+        choice(name: 'PARK', choices: ['Private', 'Public', 'Rue'], description: 'Choose your endroit de stationnement')
+    }
+
+    stages {
+        stage('Printing Parameters') {
+            steps {
+                script {
+                    //def ResultatApi = sh(script: 'python /chemin/vers/ton/script/parking_checker.py', returnStdout: true).trim()
+                    def name = "${params.NAME}"
+                    def loco = "${params.LOCO}"
+                    def paie = "${params.PAIE}"
+                    def park = "${params.PARK}"
+                    if (loco == voiture) {
+                      echo " $vehc "
+                    } else {
+                      echo "Mr./Mrs. $name"
+                    }
+                }
+            }
+        }
+
+        stage('BUILD') {
+            steps {
+                echo 'Building app...'
+                sleep 1
+                echo 'Building "[US] Utiliser la géolocalisation du téléphone" ...'
+                sleep 1
+                echo 'Build OK!'
+                echo 'Building "[US] Places de parking lors d\'évènements" ...'
+                sleep 1
+                echo 'Build OK!'
+                echo 'Building "[US] Choisir le type de paiement dans l\'application" ...'
+                sleep 2
+                echo 'Build OK!'
+                echo 'Building "[US] Regarder sur le site de la commune les horaires des parkings" ...'
+                sleep 1
+                echo 'Build OK!'
+                echo 'Building "[US] Consulter le lieu des places de parking " ...'
+                sleep 2
+                echo 'Build OK!' 
+                echo 'Building "[US] Sélectionner le type de véhicule dans l\'application" ...'
+                sleep 2
+                echo 'Build OK!'
+                echo 'Building "[US] Proposer un stationnement sur un parking privé" ...'
+                sleep 2
+                echo 'Build OK!'
+                echo 'Building "[US] Demander la date et l\'heure à l\'utilisateur" ...'
+                sleep 2
+                echo 'Build OK!'
+                echo 'Building "[US] Prévision des accidents et des incidents" ...'
+                sleep 2
+                echo 'Build OK!'
+                echo 'Building "[US] Intégration des données GPS" ...'
+                sleep 2
+                echo 'Build OK!'
+                echo 'Building "[US] Analyse du trafic" ...'
+                sleep 2
+                echo 'Build OK!'
+                echo 'Building "[US] Support multilingue" ...'
+                sleep 2
+                echo 'Build OK!'
+                echo 'Building "[US] Réservation de places de stationnement en temps réel" ...'
+                sleep 2
+                echo 'Build OK!'
+                echo 'Building "[US] Suggestion dynamique de parkings" ...'
+                sleep 2
+                echo 'Build OK!'
+                echo 'Building "[US] Réservation de places de stationnement en avance" ...'
+                sleep 2
+                echo 'Build OK!'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                echo 'Testing'
+            }
+        }
+
+        stage('DEPLOY') {
+            steps {
+                echo 'Mise en Production'
+            }
+        }
+    }
+}
