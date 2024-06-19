@@ -14,7 +14,7 @@ pipeline {
         stage('Printing Parameters') {
             steps {
                 script {
-                    def ResultatApi = sh(script: 'python /chemin/vers/ton/script/parking_checker.py', returnStdout: true).trim()
+                    //def ResultatApi = sh(script: 'python /chemin/vers/ton/script/parking_checker.py', returnStdout: true).trim()
                     def name = "${params.NAME}"
                     def vehc = "${params.VEHC}"
                     def paie = "${params.PAIE}"
@@ -83,7 +83,7 @@ pipeline {
         stage('Test') {
             when {
                 expression {
-                    return !params.SKIP_STAGES
+                    return !params.LOCO
                 }
             }
             steps {
@@ -94,7 +94,7 @@ pipeline {
         stage('DEPLOY') {
             steps {
                 echo 'Mise en Production'
-                echo "Résultat de votre requête : ${ResultatApi}"
+                //echo "Résultat de votre requête : ${ResultatApi}"
             }
         }
     }
