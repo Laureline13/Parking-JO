@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+    
+    stages {
+        stage('Vérification des places de parking et des métro disponible') {
+            steps {
+                script {
+                    // Appel du script Python pour vérifier les places de parking
+                    def parkingResult = sh(script: 'python /chemin/vers/ton/script/parking_checker.py', returnStdout: true).trim()
+                    echo "Résultat de la vérification des places de parking : ${parkingResult}"
+                    echo "Résultat de la vérification des métro disponibles : ${metroResult}"
+                    // Utilisation des résultats pour des actions ultérieures si nécessaire
+                }
+            }
+        }
+    }
+        
+    
+    post {
+        always {
+            // Actions à exécuter toujours à la fin, par exemple nettoyer les ressources
+        }
+    }
+}
