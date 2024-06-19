@@ -1,0 +1,49 @@
+pipeline {
+    agent any
+
+    environment {
+        // Remplacez par votre URL API Waze et clés nécessaires
+        WAZE_API_URL_POI = 'https://api.waze.com/v1/poi'
+        WAZE_API_URL_TRAFFIC = 'https://api.waze.com/v1/traffic'
+        WAZE_API_URL_CONDITIONS = 'https://api.waze.com/v1/conditions'
+        STORAGE_PATH = '/path/to/storage'  // Chemin pour stocker les données
+    }
+
+    stages {
+        stage('Retrieve Parking Data') {
+            steps {
+                script {
+                    echo 'Fetching parking data from Waze'
+                    sh 'python fetch_waze_data.py --url $WAZE_API_URL --output $STORAGE_PATH/data.json'
+                }
+            }
+        }
+        
+        stage('Process Data') {
+            steps {
+                script {
+                    echo 'Processing parking data'
+                    sh 'python process_waze_data.py --input $STORAGE_PATH/data.json --output $STORAGE_PATH/processed_data.json'
+                }
+            }
+        }
+        
+        stage('Store Data') {
+            steps {
+                script {
+                    echo 'Storing processed data'
+                    // Ajouter le code pour stocker les données, par exemple dans une base de données
+                }
+            }
+        }
+        
+        stage('Notify') {
+            steps {
+                script {
+                    echo 'Sending notifications'
+                    sh 'python notify_users.py --input $STORAGE_PATH/processed_data.json'
+                }
+            }
+        }
+    }
+}
