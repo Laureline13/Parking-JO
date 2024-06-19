@@ -80,9 +80,6 @@ pipeline {
         }
 
         stage('Test') {
-            when {
-                expression {
-                   // return !params.LOCO
                 }
             }
             steps {
