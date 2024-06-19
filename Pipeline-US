@@ -92,7 +92,7 @@ pipeline {
                 echo 'Mise en Production'
             }
         }
-    }
+
 
     post {
         always {
