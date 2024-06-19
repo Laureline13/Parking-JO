@@ -5,7 +5,7 @@ pipeline {
         string(name: 'NAME', description: 'Please tell me your name')
         booleanParam(name: 'SKIP_STAGES', defaultValue: false, description: 'Skip test stage')
         choice(name: 'VEHC', choices: ['Utilitaire', 'Citadine'], description: 'Choose your vehicle type')
-        choice(name: 'PAIE', choices: ['CB', 'Cash', En ligne'], description: 'Choose your paiement method')
+        choice(name: 'PAIE', choices: ['CB', 'Cash', 'En ligne'], description: 'Choose your paiement method')
         choice(name: 'Parking', choices: ['Private', 'Public', 'Rue'], description: 'Choose your endroit de stationnement')
     }
 
