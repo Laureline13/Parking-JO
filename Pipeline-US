@@ -6,7 +6,7 @@ pipeline {
         booleanParam(name: 'SKIP_STAGES', defaultValue: false, description: 'Skip test stage')
         choice(name: 'VEHC', choices: ['Utilitaire', 'Citadine'], description: 'Choose your vehicle type')
         choice(name: 'PAIE', choices: ['CB', 'Cash', 'En ligne'], description: 'Choose your paiement method')
-        choice(name: 'Parking', choices: ['Private', 'Public', 'Rue'], description: 'Choose your endroit de stationnement')
+        choice(name: 'PARK', choices: ['Private', 'Public', 'Rue'], description: 'Choose your endroit de stationnement')
     }
 
     stages {
@@ -14,6 +14,9 @@ pipeline {
             steps {
                 script {
                     def name = "${params.NAME}"
+                    def vehc = "${params.VEHC}"
+                    def paie = "${params.PAIE}"
+                    def park = "${params.PARK}"
                     if (params.SKIP_STAGES) {
                         echo "Skipping stages as SKIP_STAGES is set to true."
                     } else {
