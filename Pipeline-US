@@ -23,7 +23,6 @@ pipeline {
                     } else {
                         echo "Mr./Mrs. $name"
                     }
-                    echo "Description: $text"
                 }
             }
         }
