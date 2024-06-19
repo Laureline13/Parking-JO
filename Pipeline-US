@@ -19,10 +19,10 @@ pipeline {
                     def loco = "${params.LOCO}"
                     def paie = "${params.PAIE}"
                     def park = "${params.PARK}"
-                    //if (params.LOCO == voiture) {
-                      //  def vehc = "${params.VEHC}"
-                    //} else {
-                      //  echo "Mr./Mrs. $name"
+                    if (loco == voiture) {
+                      def vehc = "${params.VEHC}"
+                    } else {
+                      echo "Mr./Mrs. $name"
                     }
                 }
             }
