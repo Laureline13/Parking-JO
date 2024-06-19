@@ -31,10 +31,7 @@ pipeline {
                 echo 'Building "[US] Utiliser la géolocalisation du téléphone" ...'
                 sleep 1
                 echo 'Build OK!'
-                echo 'Building "[US] Places de parking lors d'évènements" ...'
-                sleep 1
-                echo 'Build OK!'
-                echo 'Building "[US] promouvoir les soldes d\'ete pour Saturne sur la page de confirmation des reservations en premiere classe" ...'
+                echo 'Building "[US] Places de parking lors d\'évènements" ...'
                 sleep 1
                 echo 'Build OK!'
                 echo 'Building "[US] Choisir le type de paiement dans l'application" ...'
@@ -46,13 +43,13 @@ pipeline {
                 echo 'Building "[US] Consulter le lieu des places de parking " ...'
                 sleep 2
                 echo 'Build OK!' 
-                echo 'Building "[US] Sélectionner le type de véhicule dans l'application" ...'
+                echo 'Building "[US] Sélectionner le type de véhicule dans l\'application" ...'
                 sleep 2
                 echo 'Build OK!'
                 echo 'Building "[US] Proposer un stationnement sur un parking privé" ...'
                 sleep 2
                 echo 'Build OK!'
-                echo 'Building "[US] Demander la date et l'heure à l'utilisateur" ...'
+                echo 'Building "[US] Demander la date et l\'heure à l'utilisateur" ...'
                 sleep 2
                 echo 'Build OK!'
                 echo 'Building "[US] Prévision des accidents et des incidents" ...'
