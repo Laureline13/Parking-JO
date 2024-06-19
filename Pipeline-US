@@ -34,7 +34,7 @@ pipeline {
                 echo 'Building "[US] Places de parking lors d\'évènements" ...'
                 sleep 1
                 echo 'Build OK!'
-                echo 'Building "[US] Choisir le type de paiement dans l'application" ...'
+                echo 'Building "[US] Choisir le type de paiement dans l\'application" ...'
                 sleep 2
                 echo 'Build OK!'
                 echo 'Building "[US] Regarder sur le site de la commune les horaires des parkings" ...'
