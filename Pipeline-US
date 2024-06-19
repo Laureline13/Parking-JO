@@ -49,7 +49,7 @@ pipeline {
                 echo 'Building "[US] Proposer un stationnement sur un parking privé" ...'
                 sleep 2
                 echo 'Build OK!'
-                echo 'Building "[US] Demander la date et l\'heure à l'utilisateur" ...'
+                echo 'Building "[US] Demander la date et l\'heure à l\'utilisateur" ...'
                 sleep 2
                 echo 'Build OK!'
                 echo 'Building "[US] Prévision des accidents et des incidents" ...'
