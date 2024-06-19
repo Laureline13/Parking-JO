@@ -4,7 +4,7 @@ pipeline {
     parameters {
         string(name: 'NAME', description: 'Please tell me your name')
         choice(name: 'LOCO', choices: ['à pied', 'moto', 'voiture'], description: 'Choose your locomotion type')
-        //choice(name: 'VEHC', choices: ['Utilitaire', 'Citadine'], description: 'Choose your vehicle type')
+        
         choice(name: 'PAIE', choices: ['CB', 'Cash', 'En ligne'], description: 'Choose your paiement method')
         choice(name: 'PARK', choices: ['Private', 'Public', 'Rue'], description: 'Choose your endroit de stationnement')
     }
