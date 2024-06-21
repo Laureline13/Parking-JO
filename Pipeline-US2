@@ -4,7 +4,7 @@ pipeline {
         string(name: 'NAME', description: 'Please tell me your name')
         choice(name: 'VEHC', choices: ['A pied', 'Moto', 'Voiture'], description: 'Choose your vehicle type')
         // Active Choice Parameter for Specific Vehicle Type
-        choice(name: 'TYPE_SPECIFIC', choices: ["SUV","Citadine","Utilitaire"], description: 'Choose your specific type')
+        //choice(name: 'TYPE_SPECIFIC', choices: ["SUV","Citadine","Utilitaire"], description: 'Choose your specific type')
         choice(name: 'PAIE', choices: ['CB', 'Cash', 'En ligne'], description: 'Choose your paiement method')
         choice(name: 'PARK', choices: ['Private', 'Public', 'Rue'], description: 'Choose your endroit de stationnement')
     }
