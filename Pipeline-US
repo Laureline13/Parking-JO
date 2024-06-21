@@ -3,7 +3,7 @@ pipeline {
     parameters {
         string(name: 'NAME', description: 'Please tell me your name')
         choice(name: 'VEHICULE', choices: ['Utilitaire', 'Citadine'], description: 'Choose your vehicle type')
-        choice(name: 'PAIE', choices: ['CB', 'Cash', 'En ligne'], description: 'Choose your paiement method')
+        choice(name: 'PAIEMENT', choices: ['CB', 'Cash', 'En ligne'], description: 'Choose your paiement method')
         choice(name: 'PARKING', choices: ['Private', 'Public', 'Rue'], description: 'Choose your endroit de stationnement')
     }
     stages {
@@ -13,7 +13,7 @@ pipeline {
                     //def ResultatApi = sh(script: 'python /chemin/vers/ton/script/parking_checker.py', returnStdout: true).trim()
                     def name = "${params.NAME}"
                     def vehc = "${params.VEHICULE}"
-                    def paie = "${params.PAIE}"
+                    def paie = "${params.PAIEMENT}"
                     def park = "${params.PARKING}"
                 }
             }
