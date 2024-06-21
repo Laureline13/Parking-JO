@@ -4,7 +4,7 @@ pipeline {
         string(name: 'NAME', description: 'Please tell me your name')
         choice(name: 'VEHC', choices: ['A pied', 'Moto', 'Voiture'], description: 'Choose your vehicle type')
         // Active Choice Parameter for Specific Vehicle Type
-       
+        choice(name: 'TYPE_SPECIFIC', choices: ["SUV","Citadine","Utilitaire"], description: 'Choose your specific type')
         choice(name: 'PAIE', choices: ['CB', 'Cash', 'En ligne'], description: 'Choose your paiement method')
         choice(name: 'PARK', choices: ['Private', 'Public', 'Rue'], description: 'Choose your endroit de stationnement')
     }
@@ -14,7 +14,7 @@ pipeline {
                 script {
                     // Dynamically update TYPE_SPECIFIC based on VEHC choice
                     if (params.VEHC == 'Voiture') {
-                        def choices =  choice(name: 'TYPE_SPECIFIC', choices: ["SUV","Citadine","Utilitaire"], description: 'Choose your specific type')
+                        def type = "${params.TYPE_SPECIFIC}"
                         // Update the choice options for TYPE_SPECIFIC
                         currentBuild.rawBuild.getAction(hudson.model.ParametersAction.class).getParameter('TYPE_SPECIFIC').value = choices.join("\n")
                     } else {
