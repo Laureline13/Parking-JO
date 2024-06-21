@@ -3,24 +3,23 @@ pipeline {
     parameters {
         string(name: 'NAME', description: 'Please tell me your name')
         choice(name: 'VEHC', choices: ['Utilitaire', 'Citadine', 'Voiture'], description: 'Choose your vehicle type')
+        // Active Choice Parameter for Specific Vehicle Type
+        choice(name: 'TYPE_SPECIFIC', choices: ["N/A"], description: 'Choose your specific type')
         choice(name: 'PAIE', choices: ['CB', 'Cash', 'En ligne'], description: 'Choose your paiement method')
         choice(name: 'PARK', choices: ['Private', 'Public', 'Rue'], description: 'Choose your endroit de stationnement')
     }
-    environment {
-        TYPE_SPECIFIC = "N/A" // Default value
-    }
     stages {
-        stage('Determine Specific Vehicle Type') {
+        stage('Setup') {
             steps {
                 script {
+                    // Dynamically update TYPE_SPECIFIC based on VEHC choice
                     if (params.VEHC == 'Voiture') {
-                        // Simulate a conditional choice for 'Voiture'
-                        // In a real scenario, this would be more interactive
-                        // For simplicity, we assign a specific type directly
-                        // This could be replaced with more sophisticated user input handling logic
-                        TYPE_SPECIFIC = input(message: 'Choose specific type for Voiture', parameters: [
-                            choice(name: 'TYPE_SPECIFIC', choices: ['SUV', 'Berline', 'Coupé'], description: 'Choose your specific type')
-                        ])
+                        def choices = ['SUV', 'Berline', 'Coupé']
+                        // Update the choice options for TYPE_SPECIFIC
+                        currentBuild.rawBuild.getAction(hudson.model.ParametersAction.class).getParameter('TYPE_SPECIFIC').value = choices.join("\n")
+                    } else {
+                        // Reset to default
+                        currentBuild.rawBuild.getAction(hudson.model.ParametersAction.class).getParameter('TYPE_SPECIFIC').value = "N/A"
                     }
                 }
             }
@@ -30,9 +29,7 @@ pipeline {
                 script {
                     echo "Name: ${params.NAME}"
                     echo "Vehicle Type: ${params.VEHC}"
-                    if (params.VEHC == 'Voiture') {
-                        echo "Specific Vehicle Type: ${TYPE_SPECIFIC}"
-                    }
+                    echo "Specific Vehicle Type: ${params.TYPE_SPECIFIC}"
                     echo "Payment Method: ${params.PAIE}"
                     echo "Parking Location: ${params.PARK}"
                 }
@@ -42,51 +39,7 @@ pipeline {
             steps {
                 echo 'Building app...'
                 sleep 1
-                echo 'Building "[US] Utiliser la géolocalisation du téléphone" ...'
-                sleep 1
-                echo 'Build OK!'
-                echo 'Building "[US] Places de parking lors d\'évènements" ...'
-                sleep 1
-                echo 'Build OK!'
-                echo 'Building "[US] Choisir le type de paiement dans l\'application" ...'
-                sleep 2
-                echo 'Build OK!'
-                echo 'Building "[US] Regarder sur le site de la commune les horaires des parkings" ...'
-                sleep 1
-                echo 'Build OK!'
-                echo 'Building "[US] Consulter le lieu des places de parking " ...'
-                sleep 2
-                echo 'Build OK!'
-                echo 'Building "[US] Sélectionner le type de véhicule dans l\'application" ...'
-                sleep 2
-                echo 'Build OK!'
-                echo 'Building "[US] Proposer un stationnement sur un parking privé" ...'
-                sleep 2
-                echo 'Build OK!'
-                echo 'Building "[US] Demander la date et l\'heure à l\'utilisateur" ...'
-                sleep 2
-                echo 'Build OK!'
-                echo 'Building "[US] Prévision des accidents et des incidents" ...'
-                sleep 2
-                echo 'Build OK!'
-                echo 'Building "[US] Intégration des données GPS" ...'
-                sleep 2
-                echo 'Build OK!'
-                echo 'Building "[US] Analyse du trafic" ...'
-                sleep 2
-                echo 'Build OK!'
-                echo 'Building "[US] Support multilingue" ...'
-                sleep 2
-                echo 'Build OK!'
-                echo 'Building "[US] Réservation de places de stationnement en temps réel" ...'
-                sleep 2
-                echo 'Build OK!'
-                echo 'Building "[US] Suggestion dynamique de parkings" ...'
-                sleep 2
-                echo 'Build OK!'
-                echo 'Building "[US] Réservation de places de stationnement en avance" ...'
-                sleep 2
-                echo 'Build OK!'
+                // Other build steps as required
             }
         }
         stage('Test') {
