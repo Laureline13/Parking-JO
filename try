@@ -2,7 +2,6 @@ pipeline {
     agent any
     parameters {
         string(name: 'NAME', description: 'Please tell me your name')
-        booleanParam(name: 'SKIP_STAGES', defaultValue: false, description: 'Skip test stage')
         choice(name: 'VEHC', choices: ['Utilitaire', 'Citadine'], description: 'Choose your vehicle type')
         choice(name: 'PAIE', choices: ['CB', 'Cash', 'En ligne'], description: 'Choose your paiement method')
         choice(name: 'PARK', choices: ['Private', 'Public', 'Rue'], description: 'Choose your endroit de stationnement')
@@ -16,11 +15,6 @@ pipeline {
                     def vehc = "${params.VEHC}"
                     def paie = "${params.PAIE}"
                     def park = "${params.PARK}"
-                    if (params.SKIP_STAGES) {
-                        echo "Skipping stages as SKIP_STAGES is set to true."
-                    } else {
-                        echo "Mr./Mrs. $name"
-                    }
                     echo "Description: $text"
                 }
             }
@@ -77,11 +71,6 @@ pipeline {
             }
         }
         stage('Test') {
-            when {
-                expression {
-                    return !params.SKIP_STAGES
-                }
-            }
             steps {
                 echo 'Testing'
             }
