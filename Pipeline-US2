@@ -1,32 +1,43 @@
 pipeline {
     agent any
-
     parameters {
         string(name: 'NAME', description: 'Please tell me your name')
-        choice(name: 'LOCO', choices: ['à pied', 'moto', 'voiture'], description: 'Choose your locomotion type')
-        choice(name: 'VEHC', choices: ['Utilitaire', 'Citadine'], description: 'Choose your vehicle type')
+        choice(name: 'VEHC', choices: ['Utilitaire', 'Citadine', 'Voiture'], description: 'Choose your vehicle type')
         choice(name: 'PAIE', choices: ['CB', 'Cash', 'En ligne'], description: 'Choose your paiement method')
         choice(name: 'PARK', choices: ['Private', 'Public', 'Rue'], description: 'Choose your endroit de stationnement')
     }
-
+    environment {
+        TYPE_SPECIFIC = "N/A" // Default value
+    }
     stages {
-        stage('Printing Parameters') {
+        stage('Determine Specific Vehicle Type') {
             steps {
                 script {
-                    //def ResultatApi = sh(script: 'python /chemin/vers/ton/script/parking_checker.py', returnStdout: true).trim()
-                    def name = "${params.NAME}"
-                    def loco = "${params.LOCO}"
-                    def paie = "${params.PAIE}"
-                    def park = "${params.PARK}"
-                    if (loco == voiture) {
-                      echo " $vehc "
-                    } else {
-                      echo "Mr./Mrs. $name"
+                    if (params.VEHC == 'Voiture') {
+                        // Simulate a conditional choice for 'Voiture'
+                        // In a real scenario, this would be more interactive
+                        // For simplicity, we assign a specific type directly
+                        // This could be replaced with more sophisticated user input handling logic
+                        TYPE_SPECIFIC = input(message: 'Choose specific type for Voiture', parameters: [
+                            choice(name: 'TYPE_SPECIFIC', choices: ['SUV', 'Berline', 'Coupé'], description: 'Choose your specific type')
+                        ])
                     }
                 }
             }
         }
-
+        stage('Printing Parameters') {
+            steps {
+                script {
+                    echo "Name: ${params.NAME}"
+                    echo "Vehicle Type: ${params.VEHC}"
+                    if (params.VEHC == 'Voiture') {
+                        echo "Specific Vehicle Type: ${TYPE_SPECIFIC}"
+                    }
+                    echo "Payment Method: ${params.PAIE}"
+                    echo "Parking Location: ${params.PARK}"
+                }
+            }
+        }
         stage('BUILD') {
             steps {
                 echo 'Building app...'
@@ -45,7 +56,7 @@ pipeline {
                 echo 'Build OK!'
                 echo 'Building "[US] Consulter le lieu des places de parking " ...'
                 sleep 2
-                echo 'Build OK!' 
+                echo 'Build OK!'
                 echo 'Building "[US] Sélectionner le type de véhicule dans l\'application" ...'
                 sleep 2
                 echo 'Build OK!'
@@ -78,16 +89,15 @@ pipeline {
                 echo 'Build OK!'
             }
         }
-
         stage('Test') {
             steps {
                 echo 'Testing'
             }
         }
-
         stage('DEPLOY') {
             steps {
                 echo 'Mise en Production'
+                //echo "Résultat de votre requête : ${ResultatApi}"
             }
         }
     }
